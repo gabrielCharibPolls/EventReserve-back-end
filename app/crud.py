@@ -2,6 +2,7 @@
 from sqlalchemy.orm import Session
 from app.models.models import Client, Reservation
 from app.schemas.schemas import ClientCreate, ReservationCreate
+import datetime
 
 
 
@@ -59,8 +60,7 @@ def create_reservation(db: Session, reservation: ReservationCreate,id_client: in
         date_fin=reservation.date_fin,
         prix=reservation.prix
     )
-    if id_client is None:
-        raise ValueError("id_client must be provided to create a reservation.")
+
     db.add(db_reservation)
     db.commit()
     db.refresh(db_reservation)
