@@ -1,9 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from app.core.config import settings
 
-# Remplace USER, PASSWORD, HOST, PORT, DB_NAME par tes infos
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:root@127.0.0.1:3306/event_reserve"
+# Construit l'URL depuis les variables d'environnement
+SQLALCHEMY_DATABASE_URL = (
+    f"mysql+pymysql://{settings.DB_USER}:{settings.DB_PASSWORD}"
+    f"@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
+)
 
 # moteur SQLAlchemy
 engine = create_engine(
